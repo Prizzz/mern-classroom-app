@@ -39,8 +39,6 @@ const Home = () => {
       <Typography variant="h6" className={classes.title}>
         Home Page
       </Typography>
-      <Link to="/users">Users</Link>
-      <Link to="/signup">SignUp</Link>
       <CardMedia className={classes.media} image={unicornbikeImg} title="Unicorn Bicycle" />
       <Typography variant="body2" component="p" className={classes.credit} color="textSecondary">
         Photo by{' '}
