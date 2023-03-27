@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Edit from '@material-ui/icons/Edit';
 import Person from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
-//import DeleteUser from './DeleteUser';
+import DeleteUser from './DeleteUser';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +82,7 @@ const Profile = ({ match }) => {
                   <Edit />
                 </IconButton>
               </Link>
+              <DeleteUser userId={user._id} />
             </ListItemSecondaryAction>
           )}
         </ListItem>

@@ -71,6 +71,10 @@ const Signup = () => {
     });
   };
 
+  const handleRequestClose = () => {
+    setValues({ ...values, open: false });
+  };
+
   return (
     <div>
       <Card className={classes.card}>
@@ -78,7 +82,7 @@ const Signup = () => {
           <Typography variant="h6" className={classes.title}>
             Sign Up
           </Typography>
-          <form action="">
+          <form>
             <TextField
               id="name"
               label="Name"
@@ -131,14 +135,7 @@ const Signup = () => {
           </Button>
         </CardActions>
       </Card>
-      <Dialog
-        open={values.open}
-        onClose={(event, reason) => {
-          if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
-            setValues({ ...values, open: false });
-          }
-        }}
-      >
+      <Dialog open={values.open} onClose={handleRequestClose}>
         <DialogTitle>New Account</DialogTitle>
         <DialogContent>
           <DialogContentText>New account successfully created.</DialogContentText>
