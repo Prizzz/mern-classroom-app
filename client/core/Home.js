@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
+const Home = () => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -60,4 +60,6 @@ export default function Home() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default Home;
