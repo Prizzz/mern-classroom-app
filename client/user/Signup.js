@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { create } from './api-user.js';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
+import { create } from './api-user.js';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 600,
     margin: 'auto',
     textAlign: 'center',
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(12),
     paddingBottom: theme.spacing(2),
   },
   error: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Signup = () => {
+export default function Signup() {
   const classes = useStyles();
   const [values, setValues] = useState({
     name: '',
@@ -61,7 +61,6 @@ const Signup = () => {
       email: values.email || undefined,
       password: values.password || undefined,
     };
-
     create(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
@@ -71,10 +70,6 @@ const Signup = () => {
     });
   };
 
-  const handleRequestClose = () => {
-    setValues({ ...values, open: false });
-  };
-
   return (
     <div>
       <Card className={classes.card}>
@@ -82,38 +77,34 @@ const Signup = () => {
           <Typography variant="h6" className={classes.title}>
             Sign Up
           </Typography>
-          <form>
-            <TextField
-              id="name"
-              label="Name"
-              className={classes.textField}
-              value={values.name}
-              onChange={handleChange('name')}
-              margin="normal"
-            />
-            <br />
-            <TextField
-              id="email"
-              type="email"
-              label="Email"
-              className={classes.textField}
-              value={values.email}
-              onChange={handleChange('email')}
-              margin="normal"
-              autoComplete="username"
-            />
-            <br />
-            <TextField
-              id="password"
-              type="password"
-              label="Password"
-              className={classes.textField}
-              value={values.password}
-              onChange={handleChange('password')}
-              margin="normal"
-              autoComplete="new-password"
-            />
-          </form>
+          <TextField
+            id="name"
+            label="Name"
+            className={classes.textField}
+            value={values.name}
+            onChange={handleChange('name')}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="email"
+            type="email"
+            label="Email"
+            className={classes.textField}
+            value={values.email}
+            onChange={handleChange('email')}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="password"
+            type="password"
+            label="Password"
+            className={classes.textField}
+            value={values.password}
+            onChange={handleChange('password')}
+            margin="normal"
+          />
           <br />{' '}
           {values.error && (
             <Typography component="p" color="error">
@@ -135,7 +126,7 @@ const Signup = () => {
           </Button>
         </CardActions>
       </Card>
-      <Dialog open={values.open} onClose={handleRequestClose}>
+      <Dialog open={values.open} disableBackdropClick={true}>
         <DialogTitle>New Account</DialogTitle>
         <DialogContent>
           <DialogContentText>New account successfully created.</DialogContentText>
@@ -150,6 +141,4 @@ const Signup = () => {
       </Dialog>
     </div>
   );
-};
-
-export default Signup;
+}

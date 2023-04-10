@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { create } from './api-course.js';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,6 +8,9 @@ import auth from './../auth/auth-helper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
+import { makeStyles } from '@material-ui/core/styles';
+import { create } from './api-course.js';
+import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -67,6 +67,7 @@ export default function NewCourse() {
     values.description && courseData.append('description', values.description);
     values.image && courseData.append('image', values.image);
     values.category && courseData.append('category', values.category);
+
     create(
       {
         userId: jwt.user._id,
@@ -87,6 +88,7 @@ export default function NewCourse() {
   if (values.redirect) {
     return <Redirect to={'/teach/courses'} />;
   }
+
   return (
     <div>
       <Card className={classes.card}>

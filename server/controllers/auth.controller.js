@@ -1,6 +1,6 @@
 import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
-import { expressjwt } from 'express-jwt';
+import expressJwt from 'express-jwt';
 import config from './../../config/config';
 
 const signin = async (req, res) => {
@@ -19,9 +19,16 @@ const signin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ _id: user._id }, config.jwtSecret);
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      config.jwtSecret
+    );
 
-    res.cookie('t', token, { expire: new Date() + 9999 });
+    res.cookie('t', token, {
+      expire: new Date() + 9999,
+    });
 
     return res.json({
       token,
@@ -46,10 +53,9 @@ const signout = (req, res) => {
   });
 };
 
-const requireSignin = expressjwt({
+const requireSignin = expressJwt({
   secret: config.jwtSecret,
   userProperty: 'auth',
-  algorithms: ['HS256'],
 });
 
 const hasAuthorization = (req, res, next) => {

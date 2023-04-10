@@ -106,6 +106,7 @@ const newLesson = async (params, credentials, lesson) => {
     console.log(err);
   }
 };
+
 const listPublished = async (signal) => {
   try {
     let response = await fetch('/api/courses/published', {

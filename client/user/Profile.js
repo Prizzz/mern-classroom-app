@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import auth from './../auth/auth-helper';
-import { read } from './api-user.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -16,21 +13,24 @@ import Edit from '@material-ui/icons/Edit';
 import Person from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import DeleteUser from './DeleteUser';
+import auth from './../auth/auth-helper';
+import { read } from './api-user.js';
+import { Redirect, Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root: theme.mixins.gutters({
     maxWidth: 600,
     margin: 'auto',
     padding: theme.spacing(3),
-    marginTop: theme.spacing(5),
-  },
+    marginTop: theme.spacing(12),
+  }),
   title: {
     marginTop: theme.spacing(3),
     color: theme.palette.protectedTitle,
   },
 }));
 
-const Profile = ({ match }) => {
+export default function Profile({ match }) {
   const classes = useStyles();
   const [user, setUser] = useState({});
   const [redirectToSignin, setRedirectToSignin] = useState(false);
@@ -62,6 +62,7 @@ const Profile = ({ match }) => {
   if (redirectToSignin) {
     return <Redirect to="/signin" />;
   }
+
   return (
     <Paper className={classes.root} elevation={4}>
       <Typography variant="h6" className={classes.title}>
@@ -93,6 +94,4 @@ const Profile = ({ match }) => {
       </List>
     </Paper>
   );
-};
-
-export default Profile;
+}

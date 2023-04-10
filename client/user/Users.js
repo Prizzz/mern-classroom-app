@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { list } from './api-user.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -13,19 +12,21 @@ import Typography from '@material-ui/core/Typography';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Person from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
+import { list } from './api-user.js';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root: theme.mixins.gutters({
     padding: theme.spacing(1),
     margin: theme.spacing(5),
-  },
+    marginTop: theme.spacing(12),
+  }),
   title: {
     margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
   },
 }));
 
-const Users = () => {
+export default function Users() {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
 
@@ -74,6 +75,4 @@ const Users = () => {
       </List>
     </Paper>
   );
-};
-
-export default Users;
+}
