@@ -11,6 +11,7 @@
     "node",
     "mern"
   ],
+  "engines": { "node": "18.x" }
   "main": "./dist/server.generated.js",
   "scripts": {
     "dev": "nodemon",
